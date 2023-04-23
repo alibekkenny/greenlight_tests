@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"database/sql" // New import
 	"errors"
+	"fmt"
 	"time"
 
 	"golang.org/x/crypto/bcrypt"
@@ -34,6 +35,7 @@ func (u *User) IsAnonymous() bool {
 func ValidateEmail(v *validator.Validator, email string) {
 	v.Check(email != "", "email", "must be provided")
 	v.Check(validator.Matches(email, validator.EmailRX), "email", "must be a valid email address")
+	fmt.Println(validator.Matches(email, validator.EmailRX))
 }
 
 func ValidatePasswordPlaintext(v *validator.Validator, password string) {
