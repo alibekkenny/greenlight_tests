@@ -42,6 +42,12 @@ func TestCreateAuthenticationToken(t *testing.T) {
 			Password: "helloWorld",
 			wantCode: http.StatusUnauthorized,
 		},
+		{
+			name:     "Wrong validation",
+			Email:    "wrong@email",
+			Password: "wrong",
+			wantCode: http.StatusUnprocessableEntity,
+		},
 	}
 
 	for _, tt := range tests {

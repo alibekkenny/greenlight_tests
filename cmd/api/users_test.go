@@ -21,45 +21,52 @@ func TestRegisterUser(t *testing.T) {
 	)
 
 	tests := []struct {
-		testName string
+		name     string
 		Name     string
 		Email    string
 		Password string
 		wantCode int
 	}{
 		{
-			testName: "valid submission",
+			name:     "valid submission",
 			Name:     validName,
 			Email:    validEmail,
 			Password: validPassword,
 			wantCode: http.StatusCreated,
 		},
 		{
-			testName: "empty name",
+			name:     "empty name",
 			Name:     "",
 			Email:    validEmail,
 			Password: validPassword,
 			wantCode: http.StatusUnprocessableEntity,
 		},
 		{
-			testName: "email address not valid",
-			Name:     validName,
+			name: "email address not valid",
+			Name: validName,
 			// Email:    "not@valid",
 			Email:    "not@valid.",
 			Password: validPassword,
 			wantCode: http.StatusUnprocessableEntity,
 		},
 		{
-			testName: "test for wrong input",
+			name:     "test for wrong input",
 			Name:     validName,
 			Email:    validEmail,
 			Password: validPassword,
 			wantCode: http.StatusBadRequest,
 		},
+		{
+			name:     "Duplicate email",
+			Name:     "Mock Test",
+			Email:    "duplicate@test.com",
+			Password: "12345678",
+			wantCode: http.StatusUnprocessableEntity,
+		},
 	}
 
 	for _, tt := range tests {
-		t.Run(tt.testName, func(t *testing.T) {
+		t.Run(tt.name, func(t *testing.T) {
 			inputData := struct {
 				Name     string
 				Email    string
@@ -75,7 +82,7 @@ func TestRegisterUser(t *testing.T) {
 			if err != nil {
 				t.Fatal("wrong input data")
 			}
-			if tt.testName == "test for wrong input" {
+			if tt.name == "test for wrong input" {
 				b = append(b, 'a')
 			}
 

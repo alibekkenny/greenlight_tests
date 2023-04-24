@@ -215,6 +215,9 @@ type MockUserModel struct {
 }
 
 func (m MockUserModel) Insert(user *User) error {
+	if user.Email == "duplicate@test.com" {
+		return ErrDuplicateEmail
+	}
 	return nil
 }
 
