@@ -244,7 +244,6 @@ func TestUpdateMovieHandler(t *testing.T) {
 	ts := newTestServer(t, app.routesTest())
 	defer ts.Close()
 
-	// update movie fields
 	tests := []struct {
 		name     string
 		url      string
@@ -303,12 +302,6 @@ func TestUpdateMovieHandler(t *testing.T) {
 			Runtime:  "18999 mins",
 			Title:    "",
 		},
-		// {
-		// 	name:     "Method Not Allowed test",
-		// 	url:      "/v1/movies/2",
-		// 	wantCode: http.StatusMethodNotAllowed,
-		// 	Runtime:  "183 min",
-		// },
 	}
 
 	for _, tt := range tests {

@@ -27,9 +27,6 @@ func TestRecoverPanicMiddleware(t *testing.T) {
 
 	assert.Equal(t, http.StatusInternalServerError, recorder.Code)
 
-	// expectedBody := `{"error":"the server encountered a problem and could not process your request"}`
-	// assert.Equal(t, expectedBody, recorder.Body.String())
-
 	expectedJSON := `{"error":"the server encountered a problem and could not process your request"}`
 	actualJSON := strings.TrimSpace(recorder.Body.String())
 
@@ -72,11 +69,6 @@ func TestRequireAuthenticated(t *testing.T) {
 	app := newTestApplication(t)
 	ts := newTestServer(t, app.routesTest())
 	defer ts.Close()
-
-	// users := []data.User{
-	// 	{ID: 1, Name: "Ryan Gosling"},
-	// 	{ID: 2, Name: "NOT Ryan Gosling"},
-	// }
 
 	tests := []struct {
 		name     string
@@ -178,7 +170,6 @@ func TestAuthenticateMiddleware(t *testing.T) {
 	ts := newTestServer(t, app.routesTest())
 	defer ts.Close()
 
-	// update movie fields
 	tests := []struct {
 		name     string
 		url      string
