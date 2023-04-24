@@ -227,5 +227,14 @@ func (m MockUserModel) Update(user *User) error {
 }
 
 func (m MockUserModel) GetForToken(tokenScope, tokenPlaintext string) (*User, error) {
-	return nil, nil
+	myText := "somethind"
+	return &User{
+		ID:        1,
+		CreatedAt: time.Now(),
+		Name:      "Test Mock",
+		Email:     "mock@test.com",
+		Password:  password{plaintext: &myText, hash: []byte{}},
+		Activated: false,
+	}, nil
+	// return nil, nil
 }

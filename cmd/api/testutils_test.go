@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -88,6 +89,32 @@ func (ts *testServer) postForm(t *testing.T, urlPath string, data []byte) (int, 
 	if err != nil {
 		t.Fatal(err)
 	}
+
+	defer rs.Body.Close()
+	body, err := io.ReadAll(rs.Body)
+	if err != nil {
+		t.Fatal(err)
+	}
+	bytes.TrimSpace(body)
+
+	return rs.StatusCode, rs.Header, string(body)
+}
+
+func (ts *testServer) putForm(t *testing.T, urlPath string, data []byte) (int, http.Header, string) {
+	reader := bytes.NewReader(data)
+	// rs, err := ts.Client().Put(ts.URL+urlPath, "application/json", reader)
+	req, err := http.NewRequest(http.MethodPut, ts.URL+urlPath, reader)
+
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+
+	rs, err := ts.Client().Do(req)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(rs)
 
 	defer rs.Body.Close()
 	body, err := io.ReadAll(rs.Body)
