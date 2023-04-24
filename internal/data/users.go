@@ -219,7 +219,24 @@ func (m MockUserModel) Insert(user *User) error {
 }
 
 func (m MockUserModel) GetByEmail(email string) (*User, error) {
-	return nil, nil
+	myPass := "examplepassword"
+	hashedPass, _ := bcrypt.GenerateFromPassword([]byte(myPass), 12)
+
+	switch email {
+	case "mock@test.com":
+		return &User{
+			ID:        1,
+			CreatedAt: time.Now(),
+			Name:      "Test Mock",
+			Email:     "mock@test.com",
+			Password:  password{plaintext: &myPass, hash: hashedPass},
+			Activated: false,
+		}, nil
+
+	default:
+		return nil, ErrRecordNotFound
+	}
+
 }
 
 func (m MockUserModel) Update(user *User) error {
@@ -227,13 +244,14 @@ func (m MockUserModel) Update(user *User) error {
 }
 
 func (m MockUserModel) GetForToken(tokenScope, tokenPlaintext string) (*User, error) {
-	myText := "somethind"
+	myPass := "examplepassword"
+	hashedPass, _ := bcrypt.GenerateFromPassword([]byte(myPass), 12)
 	return &User{
 		ID:        1,
 		CreatedAt: time.Now(),
 		Name:      "Test Mock",
 		Email:     "mock@test.com",
-		Password:  password{plaintext: &myText, hash: []byte{}},
+		Password:  password{plaintext: &myPass, hash: hashedPass},
 		Activated: false,
 	}, nil
 	// return nil, nil
