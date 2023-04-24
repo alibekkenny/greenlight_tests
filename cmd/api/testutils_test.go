@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -114,7 +113,7 @@ func (ts *testServer) putForm(t *testing.T, urlPath string, data []byte) (int, h
 	if err != nil {
 		t.Fatal(err)
 	}
-	fmt.Println(rs)
+	// fmt.Println(rs)
 
 	defer rs.Body.Close()
 	body, err := io.ReadAll(rs.Body)

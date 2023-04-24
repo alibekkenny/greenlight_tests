@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"testing"
 
@@ -78,7 +77,6 @@ func TestRegisterUser(t *testing.T) {
 			}
 
 			b, err := json.Marshal(&inputData)
-			fmt.Println(inputData)
 			if err != nil {
 				t.Fatal("wrong input data")
 			}

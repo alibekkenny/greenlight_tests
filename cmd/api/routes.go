@@ -51,5 +51,7 @@ func (app *application) routesTest() http.Handler {
 
 	router.HandlerFunc(http.MethodPost, "/v1/tokens/authentication", app.createAuthenticationTokenHandler)
 
+	router.Handler(http.MethodGet, "/debug/vars", expvar.Handler())
+
 	return router
 }
