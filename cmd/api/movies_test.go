@@ -78,14 +78,13 @@ func TestListMovies(t *testing.T) {
 			name:     "List Movies",
 			urlPath:  "/v1/movies",
 			wantCode: http.StatusOK,
-			wantBody: `{"metadata":{"current_page":1,"page_size":20,"first_page":1,"last_page":1,"total_records":3},"movies":[{"id":1,"title":"Fight Club","year":1994,"runtime":"105 mins","genres":["Sigma"],"version":0},{"id":2,"title":"Drive","year":2014,"runtime":"120 mins","genres":["Ryan","Gosling"],"version":0},{"id":3,"title":"BladeRunner 2049","year":2012,"runtime":"179 mins","genres":["Oh, You don't even smile"],"version":0}]}`,
+			wantBody: `{"metadata":{"current_page":1,"page_size":20,"first_page":1,"last_page":1,"total_records":3},"movies":[{"id":1,"title":"The Great Gatsby","year":2012,"runtime":"100 mins","genres":["Drama"],"version":0},{"id":2,"title":"Code Geass","year":2011,"runtime":"500 mins","genres":["Goat","Geass"],"version":0},{"id":3,"title":"Attack On Titan","year":2013,"runtime":"600 mins","genres":["Goat","IsayamaGenius"],"version":0}]}`,
 		},
 		{
 			name:     "List Movies",
 			urlPath:  "/v1/movies",
 			wantCode: http.StatusOK,
-			wantBody: `{"metadata":{"current_page":1,"page_size":20,"first_page":1,"last_page":1,"total_records":3},"movies":[{"id":1,"title":"Fight Club","year":1994,"runtime":"105 mins","genres":["Sigma"],"version":0},{"id":2,"title":"Drive","year":2014,"runtime":"120 mins","genres":["Ryan","Gosling"],"version":0},{"id":3,"title":"BladeRunner 2049","year":2012,"runtime":"179 mins","genres":["Oh, You don't even smile"],"version":0}]}`,
-		},
+			wantBody: `{"metadata":{"current_page":1,"page_size":20,"first_page":1,"last_page":1,"total_records":3},"movies":[{"id":1,"title":"The Great Gatsby","year":2012,"runtime":"100 mins","genres":["Drama"],"version":0},{"id":2,"title":"Code Geass","year":2011,"runtime":"500 mins","genres":["Goat","Geass"],"version":0},{"id":3,"title":"Attack On Titan","year":2013,"runtime":"600 mins","genres":["Goat","IsayamaGenius"],"version":0}]}`},
 		{
 			name:     "List Movies",
 			urlPath:  "/v1/movies?sort=23",

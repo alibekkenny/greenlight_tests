@@ -243,7 +243,11 @@ func (m MockUserModel) GetByEmail(email string) (*User, error) {
 }
 
 func (m MockUserModel) Update(user *User) error {
-	return nil
+	switch user.Email {
+	case "mock@test.com":
+		return nil
+	}
+	return ErrEditConflict
 }
 
 func (m MockUserModel) GetForToken(tokenScope, tokenPlaintext string) (*User, error) {
